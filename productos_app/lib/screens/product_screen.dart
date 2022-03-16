@@ -42,11 +42,9 @@ class ProductScreen extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: const FloatingActionButton(
-        child: Icon(Icons.save_outlined),
-        onPressed: ( value) {
-          //TODO
-        },
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.save_outlined),
+        onPressed: ( ) { },
       ),
     );
   }
