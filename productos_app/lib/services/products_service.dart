@@ -8,6 +8,8 @@ import 'package:productos_app/models/models.dart';
 class ProductsService extends ChangeNotifier{
   final String _baseUrl = 'fl-products-26c45-default-rtdb.firebaseio.com';
   final List<Product> products = [];
+  late Product? selectedProduct;
+
   bool isLoading = true;
 
   ProductsService(){
@@ -30,7 +32,7 @@ class ProductsService extends ChangeNotifier{
       
     });
 
-    //this.isLoading= false;
+    this.isLoading= false;
     notifyListeners();
     return this.products;
 

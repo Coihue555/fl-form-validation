@@ -24,14 +24,18 @@ class ProductCard extends StatelessWidget {
           children: [
             _BackgroundImage( product.picture),
 
-            _ProductDetails(),
+            _ProductDetails(
+              title: product.name,
+              subtitle: product.id!,
+            ),
 
             Positioned(
               top: 0,
               right: 0,
-              child: _PriceTag()
+              child: _PriceTag(product.price)
             ),
 
+            if(!product.available)
             Positioned(
               top: 0,
               left: 0,
@@ -81,15 +85,18 @@ class _NotAvailable extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
+  final double price;
+
+  const _PriceTag( this.price );
   
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: const FittedBox(
+      child: FittedBox(
         fit: BoxFit.contain,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: Text('\$103.99', style: TextStyle(color: Colors.white, fontSize: 20),),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Text('\$$price', style: const TextStyle(color: Colors.white, fontSize: 20),),
         ),
       ),
       width: 100,
@@ -104,7 +111,14 @@ class _PriceTag extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
-  
+  final String title;
+  final String subtitle;
+
+  const _ProductDetails({
+    required this.title,
+    required this.subtitle
+    });
+
 
   @override
   Widget build(BuildContext context) {
@@ -117,16 +131,16 @@ class _ProductDetails extends StatelessWidget {
         decoration: _buildBoxDecoration(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             Text(
-              'Disco HDD',
-              style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+              title,
+              style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              'Id del Disco duro',
-              style: TextStyle(fontSize: 20, color: Colors.white,),
+              subtitle,
+              style: const TextStyle(fontSize: 20, color: Colors.white,),
             )
           ],
         ),
@@ -154,7 +168,11 @@ class _BackgroundImage extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 400,
-        child: FadeInImage(
+        child: url == null
+        ? const Image(image: AssetImage('assets/no-image.png'),
+        fit: BoxFit.cover
+        )
+        : FadeInImage(
           placeholder: const AssetImage('assets/jar-loading.gif'),
           image: NetworkImage(url!),
           fit: BoxFit.cover,
