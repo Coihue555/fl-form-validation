@@ -23,7 +23,7 @@ class ProductImage extends StatelessWidget {
             borderRadius: const BorderRadius.only(topLeft: Radius.circular(45), topRight: Radius.circular(45)),
             child: this.url == null
             ? const Image(
-                image: AssetImage('assets/no-image.jpg'),
+                image: AssetImage('assets/no-image.png'),
                 fit: BoxFit.cover
               )
             : FadeInImage(
