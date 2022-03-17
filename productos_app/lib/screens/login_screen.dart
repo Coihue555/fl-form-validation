@@ -22,7 +22,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const SizedBox(height: 10),
                     Text('Login', style: Theme.of(context).textTheme.headline4,),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 30),
                     ChangeNotifierProvider(
                       create: ( _ ) => LoginFormProvider(),
                       child: _LoginForm(),
@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 50),
               TextButton(
                 onPressed: ( )=> Navigator.pushReplacementNamed(context, 'register'),
                 style: ButtonStyle(
@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 child: const Text('Crear una nueva cuenta', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),
               ),
-              const SizedBox(height: 30,)
+              const SizedBox(height: 50,)
             ],
           ),
         )
@@ -80,7 +80,7 @@ class _LoginForm extends StatelessWidget {
                 : 'El correo no es válido';
               },
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 30,),
             TextFormField(
               autocorrect: false,
               obscureText: true,
@@ -96,14 +96,14 @@ class _LoginForm extends StatelessWidget {
                 return 'La contraseña debe tener 8 caracteres minimo';
               },
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(height: 30,),
             MaterialButton(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               disabledColor: Colors.grey,
               elevation: 0,
               color: Colors.deepPurple,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
                 child: Text(
                   loginForm.isLoading
                   ? 'Espere...'
@@ -124,7 +124,7 @@ class _LoginForm extends StatelessWidget {
                 if( errorMessage == null ){
                   Navigator.pushReplacementNamed(context, 'home');
                 } else {
-                  print(errorMessage);
+                  NotificationsService.showSnackbar(errorMessage);
                   loginForm.isLoading = false;
                 }
               })
