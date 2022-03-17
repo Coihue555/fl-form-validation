@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                   overlayColor: MaterialStateProperty.all(Colors.indigo.withOpacity(0.1)),
                   shape: MaterialStateProperty.all(StadiumBorder())
                 ),
-                child: const Text('Crear una nueva cuenta', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),),
+                child: const Text('Crear una nueva cuenta', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87),),),
               const SizedBox(height: 30,)
             ],
           ),
