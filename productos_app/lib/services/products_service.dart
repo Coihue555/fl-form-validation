@@ -12,7 +12,7 @@ class ProductsService extends ChangeNotifier{
   final List<Product> products = [];
   late Product? selectedProduct;
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   File? newPictureFile;
 
@@ -96,7 +96,7 @@ class ProductsService extends ChangeNotifier{
   Future<String?> uploadImage() async{
     if ( newPictureFile == null) return null;
 
-    this.isSaving = true;
+    isSaving = true;
     notifyListeners();
 
     final url = Uri.parse('https://api.cloudinary.com/v1_1/ddqgofklk/image/upload?upload_preset=ogrivata');
@@ -113,7 +113,7 @@ class ProductsService extends ChangeNotifier{
       print(resp.body);
       return null;
     }
-    this.newPictureFile = null;
+    newPictureFile = null;
     final decodedData = json.decode(resp.body);
     return decodedData['secure_url'];
   }

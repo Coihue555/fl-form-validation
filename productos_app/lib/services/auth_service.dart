@@ -9,7 +9,7 @@ class AuthService extends ChangeNotifier{
   final String _baseUrl = 'identitytoolkit.googleapis.com';
   final String _firebaseToken = 'AIzaSyB-_00WHAalIVkvggMEXixD_BncG__E2IA';
 
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
 
   Future<String?> createUser(String email, String password ) async {
     final Map<String, dynamic> authData = {

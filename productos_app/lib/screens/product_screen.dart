@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -40,7 +37,6 @@ class _ProductScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? path;
     final productForm = Provider.of<ProductFormProvider>(context);
 
     return Scaffold(
