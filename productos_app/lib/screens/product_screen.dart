@@ -1,7 +1,11 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:image_picker/image_picker.dart';
+
 
 import 'package:productos_app/providers/product_form_provider.dart';
 import 'package:productos_app/services/services.dart';
@@ -36,7 +40,7 @@ class _ProductScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    String? path;
     final productForm = Provider.of<ProductFormProvider>(context);
 
     return Scaffold(
@@ -61,7 +65,7 @@ class _ProductScreenBody extends StatelessWidget {
                   right: 45,
                   child: IconButton(
                     onPressed: () async {
-                        final picker = ImagePicker();
+                        final ImagePicker picker = ImagePicker();
                         final XFile? pickedFile = await picker.pickImage(
                           source: ImageSource.camera,
                           imageQuality: 100,
@@ -71,7 +75,23 @@ class _ProductScreenBody extends StatelessWidget {
                           print('No selecciono ninguna imagen');
                           return;
                         }
-                        print('Tenemos imagen: ${pickedFile.path}');
+
+                    //   List<Media>? res = await ImagesPicker.pick(
+                    //     count: 3,
+                    //     pickType: PickType.all,
+                    //     maxTime: 30,
+                    //   );
+
+                    //   print(res);
+
+                    //   if (res != null) {
+                    //     print(res.map((e) => e.path).toList());
+                    //     path = res[0].thumbPath;
+                        
+                    //     bool status = await ImagesPicker.saveImageToAlbum(File(res[0].path));
+                    //     print(status);
+                    //   }
+                        
                         productService.updateSelectedProductImage(pickedFile.path);
                     },
                     icon: const Icon(Icons.camera_alt_outlined, size: 50, color: Color.fromARGB(255, 255, 255, 255)),
@@ -87,11 +107,19 @@ class _ProductScreenBody extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.save_outlined),
-        onPressed: ( ) async { 
-          if ( !productForm.isValidForm() ) return;
+        child: productService.isSaving
+          ? const CircularProgressIndicator(color: Colors.white,)
+          : const Icon(Icons.save_outlined),
+        onPressed: productService.isSaving 
+          ? null
+          : ( ) async { 
+            if ( !productForm.isValidForm() ) return;
 
-          await productService.saveOrCreateProduct(productForm.product);
+            final String? imageUrl = await productService.uploadImage();
+
+            if (imageUrl != null) productForm.product.picture=imageUrl;
+
+            await productService.saveOrCreateProduct(productForm.product);
         },
       ),
     );
