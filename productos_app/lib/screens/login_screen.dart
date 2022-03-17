@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:productos_app/providers/login_form_provider.dart';
 import 'package:productos_app/services/services.dart';
+import 'package:provider/provider.dart';
+
 import 'package:productos_app/ui/input_decorations.dart';
 import 'package:productos_app/widgets/widgets.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
    
@@ -16,16 +17,18 @@ class LoginScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox(height: 250,),
+
+              const SizedBox(height: 250),
+              
               CardContainer(
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
                     Text('Login', style: Theme.of(context).textTheme.headline4,),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 10),
                     ChangeNotifierProvider(
                       create: ( _ ) => LoginFormProvider(),
-                      child: _LoginForm(),
+                      child: _LoginForm()
                       )
                     
 
