@@ -18,7 +18,7 @@ class AppState extends StatelessWidget {
           create: ( _ )=> ProductsService()
         )
       ],
-      child: MyApp(),
+      child: const MyApp(),
     );
   }
 }

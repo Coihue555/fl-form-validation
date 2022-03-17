@@ -61,7 +61,7 @@ class _ProductScreenBody extends StatelessWidget {
                   right: 45,
                   child: IconButton(
                     onPressed: () async {
-                        final picker = new ImagePicker();
+                        final picker = ImagePicker();
                         final XFile? pickedFile = await picker.pickImage(
                           source: ImageSource.camera,
                           imageQuality: 100,
@@ -72,6 +72,7 @@ class _ProductScreenBody extends StatelessWidget {
                           return;
                         }
                         print('Tenemos imagen: ${pickedFile.path}');
+                        productService.updateSelectedProductImage(pickedFile.path);
                     },
                     icon: const Icon(Icons.camera_alt_outlined, size: 50, color: Color.fromARGB(255, 255, 255, 255)),
                   ),
@@ -176,4 +177,6 @@ class _ProductForm extends StatelessWidget {
       ]
     );
   }
+
+
 }

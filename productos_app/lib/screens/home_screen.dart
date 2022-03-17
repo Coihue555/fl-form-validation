@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final productsService = Provider.of<ProductsService>(context);
-    if ( productsService.isLoading ) return LoadingScreen();
+    if ( productsService.isLoading ) return const LoadingScreen();
 
     return Scaffold(
       appBar: AppBar(
@@ -34,11 +34,10 @@ class HomeScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: (){
-
           productsService.selectedProduct = Product(
-            available: false,
+            available: true,
             name: '',
-            price: 0
+            price: 0.0
           );
           Navigator.pushNamed(context, 'product');
         },
