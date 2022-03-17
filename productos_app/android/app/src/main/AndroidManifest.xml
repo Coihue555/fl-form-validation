@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.productos_app">
+    package="com.octarinecode.productos">
    <application
-        android:label="productos_app"
+        android:label="Tus Ambos Woaaa"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
