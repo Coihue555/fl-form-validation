@@ -1,4 +1,4 @@
-package com.example.productos_app
+package com.octarinecode.productos
 
 import io.flutter.embedding.android.FlutterActivity
 
